@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro de Usuario</title>
+    <link rel="stylesheet" href="static/styles.css" />
+  </head>
+  <body>
+    <h1>Registro de Usuario</h1>
+    <div class="container">
+      <form id="registerForm">
+        <div class="input-group">
+          <input
+            type="text"
+            id="username"
+            placeholder="Nombre de usuario"
+            required
+          />
+          <label for="username">Nombre de Usuario:</label>
+        </div>
+        <div class="input-group">
+          <input
+            type="text"
+            id="numero"
+            placeholder="Número de teléfono"
+            required
+          />
+          <label for="numero">Número de Teléfono:</label>
+        </div>
+        <div class="input-group">
+          <select id="role" required>
+            <label for="role">Tipo de Usuario:</label>
+            <option value="ADMIN">Administrador</option>
+            <option value="ESTUDIANTE">Estudiante</option>
+            <option value="PROFESOR">Profesor</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <input
+            type="password"
+            id="password"
+            placeholder="Contraseña"
+            required
+          />
+          <label for="password">Contraseña:</label>
+        </div>
+        <div class="input-group">
+          <input type="submit" value="Registrar" />
+        </div>
+        <a href="/index.html" class="register-button">Volver al inicio</a>
+      </form>
+      <div id="statusMessage"></div>
+      <img
+        id="qrImage"
+        src=""
+        alt="Código QR"
+        style="display: none; margin-top: 1.5rem"
+      />
+    </div>
+
+    <script>
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
+
+          const username = document.getElementById("username").value;
+          const numero = document.getElementById("numero").value;
+          const role = document.getElementById("role").value;
+          const password = document.getElementById("password").value;
+
+          const response = await fetch("/.netlify/functions/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, numero, role, password }),
+          });
+
+          const data = await response.json();
+          const statusMessage = document.getElementById("statusMessage");
+          const qrImage = document.getElementById("qrImage");
+
+          if (data.success) {
+            statusMessage.textContent =
+              "Usuario registrado correctamente. Escanea el código QR con tu aplicación de autenticación.";
+            qrImage.src = data.qrImageUrl;
+            qrImage.style.display = "block";
+          } else {
+            statusMessage.textContent = `Error: ${data.error}`;
+            qrImage.style.display = "none";
+          }
+        });
+    </script>
+  </body>
+</html>

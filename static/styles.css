@@ -1,0 +1,293 @@
+:root {
+    --bg-primary: #1e1e24;
+    --bg-secondary: #2a2e38;
+    --accent-neon: #ff79c6;
+    --accent-purple: #bd93f9;
+    --accent-green: #50fa7b;
+    --text-primary: #f8f8f2;
+    --text-secondary: #6272a4;
+    --danger: #ff5555;
+    --gradient-cosmic: linear-gradient(135deg, #ff79c6 0%, #bd93f9 100%);
+    --gradient-aurora: linear-gradient(135deg, #50fa7b 0%, #ff79c6 100%);
+}
+
+body {
+    font-family: 'Outfit', 'Verdana', sans-serif;
+    background-color: var(--bg-primary);
+    background-image: 
+        radial-gradient(circle at 20% 20%, rgba(255, 121, 198, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(189, 147, 249, 0.15) 0%, transparent 40%);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 2rem 0;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+h1::before {
+    content: '';
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: var(--accent-neon);
+    filter: blur(80px);
+    opacity: 0.5;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 2rem auto;
+    background: var(--bg-secondary);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 2px 1px rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-cosmic);
+    opacity: 0.8;
+}
+
+nav { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 1rem 2rem; 
+    background-color: var(--bg-secondary); 
+    border-bottom: 2px solid var(--accent-neon); 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
+}
+
+.nav-links { 
+    display: flex; 
+    gap: 1rem; 
+} 
+
+.nav-links a { 
+    color: var(--text-primary); 
+    text-decoration: none; 
+    padding: 0.5rem 1rem; 
+    transition: background-color 0.3s ease, color 0.3s ease; 
+    border-radius: 8px; 
+} 
+
+.nav-links a:hover { 
+    background-color: var(--accent-neon); 
+    color: var(--bg-primary); 
+} 
+
+.logout-button { 
+    background-color: var(--danger); 
+    color: var (--text-primary); 
+    border: none; 
+    padding: 0.5rem 1rem; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+
+.logout-button:hover { 
+    background-color: #ff4b4b; 
+    transform: scale(1.05); 
+}
+
+label {
+    font-weight: 500;
+    color: var(--text-secondary);
+    display: block;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+input[type="email"],
+input[type="text"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: rgba(30, 30, 36, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--accent-neon);
+    box-shadow: 0 0 0 4px rgba(255, 121, 198, 0.1);
+}
+
+input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.6;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 1rem;
+    background: var(--gradient-aurora);
+    color: var(--bg-primary);
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+input[type="submit"]:hover {
+    transform: none;
+    box-shadow: 
+        0 10px 20px rgba(115, 218, 202, 0.2),
+        0 6px 6px rgba(115, 218, 202, 0.1);
+}
+
+input[type="submit"]:active {
+    transform: none;
+}
+
+.notification {
+    background: rgba(255, 85, 85, 0.1);
+    border-left: 4px solid var(--danger);
+    color: var(--danger);
+    padding: 1rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transform: translateX(-10px);
+    animation: slideIn 0.3s ease forwards;
+}
+
+.register-button {
+    display: inline-block;
+    padding: 0.875rem 1.75rem;
+    background: var(--gradient-cosmic);
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.register-button::before {
+    content: '';
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-aurora);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.register-button:hover {
+    transform: none;
+    box-shadow: 0 8px 16px rgba(189, 147, 249, 0.2);
+}
+
+.register-button:hover::before {
+    opacity: 1;
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Floating label animation */
+.input-group label {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--bg-secondary);
+    padding: 0 8px;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+/* Cool focus effect for inputs */
+input:focus ~ label,
+input:not(:placeholder-shown) ~ label {
+    transform: translateY(-25px) scale(0.8);
+    color: var(--accent-neon);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 1.5rem;
+        margin: 1rem auto;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    input[type="submit"],
+    .register-button {
+        padding: 0.875rem;
+    }
+}
+
+/* Cool hover effect for container */
+.container:hover::before {
+    animation: rainbow 3s linear infinite;
+}
+@keyframes rainbow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
